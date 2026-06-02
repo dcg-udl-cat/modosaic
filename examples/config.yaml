@@ -1,0 +1,33 @@
+dataset:
+  type: local
+  root: ./images
+  recursive: true
+  extensions: [.jpg, .png]
+
+modalities:
+  enabled: [image, segmentation, depth]
+  models:
+    segmentation: sam3
+    depth: depth-anything-v2-small
+
+validators:
+  enabled: true
+  constraints:
+    enabled: true
+    segmentation_mask_quality_minimum: 0.70
+    segmentation_boundary_minimum: 0.20
+    depth_imagebind_minimum: 0.55
+    depth_segmentation_boundary_minimum: 0.15
+  segmentation_boundary_thickness: 1
+  segmentation_tolerance_radius: 2
+  segmentation_rgb_edge_quantile: 0.90
+  depth_boundary_thickness: 1
+  depth_tolerance_radius: 2
+  depth_edge_quantile: 0.90
+
+run:
+  limit: 20
+  experiment_root: ./experiments
+  experiment_name: local-seg-depth
+  log_path: ./.logs
+  seed: 42
