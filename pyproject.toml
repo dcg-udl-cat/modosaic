@@ -1,0 +1,73 @@
+[project]
+name = "modosaic"
+version = "1.0.0post1"
+description = "Modosaic: A Multimodal Mosaic for In-Context Learning"
+readme = "README.md"
+authors = [
+    {name = "Oriol Agost Batalla", email = "oriol.agost@udl.cat"},
+    {name = "Oriol Agost Batalla", email = "oriol.agost@gft.com"},
+]
+requires-python = "~=3.13.0"
+dependencies = [
+    "numpy>=2.4.2",
+    "torch==2.10.0",
+    "pyarrow>=20.0.0",
+    "transformers==5.2.0",
+    "einops>=0.8.2",
+    "timm>=1.0.25",
+    "sentencepiece>=0.2.1",
+    "qwen-vl-utils==0.0.14",
+    "accelerate==1.12.0",
+    "diffusers>=0.36.0",
+    "imagebind",
+    "setuptools==81.0.0",
+    "segment-anything",
+    "opencv-python==4.13.0.92",
+    "typer>=0.24.1",
+]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Utilities",
+]
+license = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/dcg-udl-cat/modosaic"
+Documentation = "https://modosaic.udl.cat"
+Source = "https://github.com/dcg-udl-cat/modosaic"
+Issues = "https://github.com/dcg-udl-cat/modosaic/issues"
+
+[tool.setuptools.package-data]
+modosaic = ["log/*.json"]  # Include the log configuration on the build
+
+[project.scripts]
+modosaic = "modosaic.cli.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["modosaic*"]
+exclude = ["site*", "data*", "experiments*", "model_weights*"]
+
+[tool.uv.sources]
+imagebind = { git = "https://github.com/facebookresearch/ImageBind.git" }
+segment-anything = { git = "https://github.com/facebookresearch/segment-anything.git" }
+
+[dependency-groups]
+docs = [
+    "mkdocs==1.6.1",
+    "mkdocs-material==9.5.39",
+    "mkdocstrings>=0.30.0",
+    "mkdocstrings-python==1.18.2",
+    "mkdocs-gen-files==0.5.0",
+    "mkdocs-literate-nav==0.6.1",
+    "mkdocs-section-index==0.3.9",
+]
+
+[build-system]
+requires = ["setuptools==81.0.0"]
+build-backend = "setuptools.build_meta"
